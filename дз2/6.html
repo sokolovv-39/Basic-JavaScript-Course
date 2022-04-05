@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+<body>
+<!--
+Необязательное задание.
+
+Необходимо реализовать функцию, которая будет принимать первым аргументом
+целое положительное число, в следующих трех аргументах функция принимает слова
+в разных склонениях.
+Функция должна возвращать одно из трех переданных в параметры слов подходящее
+под число, которое передано первым аргументом.
+
+Пример:
+console.log(declinationOfNumber(1, "яблоко", "яблока", "яблок")); // "яблоко"
+console.log(declinationOfNumber(2, "мяч", "мяча", "мячей")); // "мяча"
+console.log(declinationOfNumber(5, "стул", "стула", "стульев")); // "стульев"
+
+Функция должна работать с любым словом и любым целым положительным числом.
+Все аргументы, которые будут передаваться функции будут верны.
+-->
+<script>
+  "use strict";
+
+  function declinationOfNumber(count, one, two, five) {
+    if ((count%10>=5)||(count%10===0)||(Math.floor(count/10)%10===1)) return five;
+    else if (count%10===1) return one;
+    else return two;
+  }
+  const thingsNumber = prompt("Введите количество");
+  let word = prompt("Введите слово в разных склонениях(3 слова, через пробел)");
+  let one, two, five;//насколько хорошо объявлять переменные так, т е не присваивая им значения?
+  for(let i=0;i<3;i++){
+    let j=0;
+    while((word[j]!=" ")&&(i<2)) j++;
+    if (i===0) one = word.slice(0,j);
+    else if(i===1) two = word.slice(0,j);
+    else five = word;
+    if (i<2) word = word.substring(j+1);
+  }
+  alert(`У меня есть ${thingsNumber} ${declinationOfNumber(thingsNumber,one, two, five)}.`);
+
+</script>
+</body>
+</html>
