@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+<body>
+<!--
+Обязательное задание.
+
+Необходимо вывести в консоль значения выражений:
+10 + 10 + "10"
+10 + "10" + 10
+10 + 10 + +"10"
+10 / -""
+10 / +"2,5"
+В этих выражениях нет опечаток, вам их нужно скопировать и вывести в консоль.
+
+Над каждым выводом в консоль необходимо объяснить почему мы получаем такой
+результат.
+
+Объяснения пишите в таком формате:
+/*
+1. 4 умножаем на 2 получаем 8.
+2. 3 минус 8 получаем -5.
+3. С помощью console.log выводим число -5 в консоль.
+*/
+console.log(3 - 4 * 2);
+-->
+<script>
+  "use strict";
+  let firstExpression = 10 + 10 + "10";
+  console.log("10+10 = 20 - сложение как тип число, + \"10\"");
+  console.log(firstExpression);
+  let secondExpression = 10 + "10" + 10;
+  console.log("число 10 переводится в строку, конкатенирует - 1010 (тип строка), затем то же самое");
+  console.log(secondExpression);
+  let thirdExpression = 10 + 10 + +"10";
+  console.log("10+10 как числа, +\"10\" дает тип число, итого 30");
+  console.log(thirdExpression);
+  let fourthExpression = 10/-"";
+  console.log("-\"\" дает 0 (тип число), получается -Infinity");
+  console.log(fourthExpression);
+  let fifthExpression = 10 +"2.5";
+  console.log("10 из number переводится в string, конкатенирует с \"2.5\"");
+  console.log(fifthExpression);
+</script>
+</body>
+</html>

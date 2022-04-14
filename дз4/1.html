@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+<body>
+<!--
+Обязательное задание.
+
+Необходимо данное задание выполнить в es5 стиле и в es6 стиле.
+Необходимо создать функцию-конструктор/класс для продукта.
+Названия: `ProductES5` для es5 стиля, `ProductES6` для es6 стиля.
+При создании объекта от функции-конструктора/класса необходимо передавать имя
+и цену товара, эта информация должна быть сохранена в объекте.
+Также у объекта должна быть возможность выполнить метод `make25Discount`, данный
+метод должен уменьшать стоимость продукта на 25%.
+Необходимо продемонстрировать работу с объектом (в свободной форме).
+-->
+<script>
+  "use strict";
+
+  //в качестве работы с объектом создал объекты, которые наследуются от ProductES5 и ProductES6
+  //ES5
+  function ProductES5 (company, price) {
+    this.company = company;
+    this.price = price;
+  }
+
+  ProductES5.prototype.make25Discount = function () {
+    this.price*=0.75;
+  }
+  function Sneakers_model (company, price, model){
+    ProductES5.call(this, company, price);
+    this.model = model;
+  }
+
+  Sneakers_model.prototype = Object.create(ProductES5.prototype);
+  Sneakers_model.prototype.productInfo = function (){
+    console.log(`Бренд: ${this.company}\nМодель: ${this.model}\nЦена: ${this.price}`);
+  }
+  Sneakers_model.prototype.constructor = Sneakers_model;
+
+  const sneakers = new ProductES5("nike", 15000);
+  console.log(sneakers);
+  const promoSneakers = new ProductES5(sneakers.company, sneakers.price);
+  const nikeAirForce = new Sneakers_model(sneakers.company, sneakers.price,"Air Force");
+  nikeAirForce.productInfo();
+  //такой вопрос, а есть ли какая то функция или еще что то, которая клонирует
+  //объект со всеми его прототипами? Просто если я все правильно понял, то Object.assign,
+  //spread, JSON.parse, и даже глубокое клонирование там .cloneDeep
+  //не копируют прототипы
+  promoSneakers.make25Discount();
+  console.log(promoSneakers);
+  
+  //ES6
+  class ProductES6{
+    constructor(company, price){
+      this.company = company;
+      this.price = price;
+    }
+    make25Discount(){
+      this.price*=0.75;
+    }
+  }
+  const laptop = new ProductES6("MSI", 250000);
+  laptop.make25Discount();
+  console.log(laptop);
+  class Laptop_model extends ProductES6{
+    constructor(company,price,model,videoCard){
+      super (company,price);
+      this.model = model;
+      this.videoCard = videoCard;
+    }
+    overclocking(){
+      console.log(`${this.company} ${this.model} разогнан`);
+    }
+  }
+  const gt76_Titan = new Laptop_model("MSI", 433000, "GT76 Titan", "GeForce RTX 3080 Ti");
+  gt76_Titan.overclocking();
+</script>
+</body>
+</html>
